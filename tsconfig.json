@@ -14,5 +14,8 @@
   "compilerOptions": {
     // ...
     "types": ["element-plus/global"]
-  }
+  },
+  "include": [
+    "src/**/*", // inclui todos os arquivos na pasta src e suas subpastas
+  ]
 }

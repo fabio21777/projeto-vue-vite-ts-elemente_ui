@@ -9,7 +9,7 @@
     </el-form-item>
     <el-form-item label="Status" prop="status">
       <el-select v-model="ruleForm.status" class="m-2" placeholder="Select" size="large">
-        <el-option v-for="item in listStatus" :key="item" :label="item" :value="item" />
+        <el-option v-for="item in Object.values(StuatusRestaurante)" :key="item" :label="item" :value="item" />
       </el-select>
     </el-form-item>
 
@@ -19,7 +19,7 @@
     </el-form-item> 
   </el-form>
   <ul>
-    <li v-for="restaurante in restauranteList" :key="restaurante.id">
+    <li v-for="restaurante in restauranteList" :key="restaurante.nome">
       {{ restaurante.nome }}
       {{ restaurante }}
     </li>
@@ -29,23 +29,16 @@
 <script lang="ts" setup>
 import { reactive, ref, type Ref } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
-
+import {StuatusRestaurante}  from "../constants/StuatusRestaurante";
+import {Restaurante} from "../constants/Restaurante"
 
 //
 const restauranteList: Ref<Restaurante[]> = ref([]);
 
-interface Restaurante {
-  nome: string;
-  endereco: string;
-  status: StuatusRestaurante;
-  pratos: string[];
-}
 
+/*type StuatusRestaurante = "Quero voltar" | "recomendo" | "não recomendo" | "tentar novamente";
 
-type StuatusRestaurante = "Quero voltar" | "recomendo" | "não recomendo" | "tentar novamente";
-
-const listStatus = ["Quero voltar", "recomendo", "não recomendo", "tentar novamente"];
-
+const listStatus = ["Quero voltar", "recomendo", "não recomendo", "tentar novamente"];*/
 
 
 
@@ -55,7 +48,7 @@ const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive<Restaurante>({
   nome: '',
   endereco: '',
-  status: 'Quero voltar',
+  status: StuatusRestaurante.QueroVoltar,
   pratos: [],
 });
 

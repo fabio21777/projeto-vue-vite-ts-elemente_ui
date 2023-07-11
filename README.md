@@ -1,52 +1,63 @@
-# vue-project
+## Descrição
 
-This template should help get you started developing with Vue 3 in Vite.
+Este projeto é apenas para fins de aprendizado. Foi baseado no tutorial do desenvolvedor Ben do canal BenCodeZen. Aqui está o link para o vídeo(https://youtu.be/p1eO5dZnp_Q). Foram utilizados os componentes do Element Plus, como inputs, botões e validações de formulário.
 
-## Recommended IDE Setup
+## Criação do projeto 
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### criando projeto vue com vite
 
-## Type Support for `.vue` Imports in TS
+```shell 
+npm create vue@3
+```
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+### Instalando elemente ui 
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+```shell 
+npm install element-plus --save
+```
 
-## Customize configuration
+#### Instalando import sob demanda
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Para instalar as dependências necessárias para importar os componentes do Element Plus sob demanda, execute o seguinte comando:
 
-## Project Setup
+```shell 
+npm install -D unplugin-vue-components unplugin-auto-import
+```
 
-```sh
+Após a instalação, adicione o seguinte código ao arquivo vite.config.ts:
+
+```typescript 
+// vite.config.ts
+import { defineConfig } from 'vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
+export default defineConfig({
+  // ...
+  plugins: [
+    // ...
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ],
+})
+
+link para instalação elemente plus e import sob demanda
+-https://element-plus.org/en-US/guide/installation.html
+-https://element-plus.org/en-US/guide/quickstart.html
+
+
+
+```
+## iniciando projeto 
+
+```shell 
+cd <your-project-name>
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
